@@ -3,17 +3,34 @@ My solutions for Advent of Code 2023. In Python 3, and I'm also porting them to 
 
 As last year, I'm generally not starting the problems as soon as they open, so I won't usually be reporting solve times.
 
-Go to day: [1](#day1) [2](#day2)
+Go to day: [1](#day1) [2](#day2) [3](#day3) [4](#day4)
+
+---
+
+**Day 4**: [Scratchcards](https://adventofcode.com/2023/day/4)<a name="day4"></a> - [my solution](https://github.com/meithan/AoC23/blob/main/day04)
+
+Fairly straightforward one. Except that for Part 2 my initial solution was too slow, as I was actually trying to build the list of all the "spawned" card numbers, and then counting how big it was -- turns out the answer was around 19 million for my input.
+
+The solution was to only *count* how many cards each card spawns, which is the sum of of cards spawned by each the cards that follow it (according to its number of matches). That can be done recursively quite nicely.
+
+To further optimize it (albeit it wasn't really needed), I also memoized the results (number of cards spawned by each card) using a dictionary. That brings to computation time from something like 3.8 seconds down to *24 milliseconds*.
+
+Julia notes:
+* `split()` accepts the useful optional boolean argument `keepempty`
+* I used `map()` in this one, using the anonymous function definition syntax (similar to `lambda` in Python)
+* I learned after the fact that Julia also has [array comprehensions](https://docs.julialang.org/en/v1/manual/arrays/#man-comprehensions)
+* Still loving indexing from 1
+* Exponentiation uses `^`, not `**`
 
 ---
 
 **Day 3**: [Gear Ratios](https://adventofcode.com/2023/day/3)<a name="day3"></a> - [my solution](https://github.com/meithan/AoC23/blob/main/day03)
 
-Not difficult, just a matter of correctly parsing the numbers and of finding what's around them in the grid. Had to be specially wary of [off-by-one](https://en.wikipedia.org/wiki/Off-by-one_error) errors.
+Not difficult, just a matter of correctly parsing the numbers and of finding what's around them in the grid. Was specially wary of [out of bounds](https://en.wikipedia.org/wiki/Bounds_checking) and [off-by-one](https://en.wikipedia.org/wiki/Off-by-one_error) errors.
 
 Julia notes:
-* I keep putting colons after `for` and `if` XD
-* Length-1 substrings must be compared against characters, using `' '`, nor strings
+* I keep putting colons after `for`, `if` and `while` XD
+* Length-1 substrings must be compared against characters (i.e. using `' '`), not strings
 * Again, Julia shows how much more intuitive indexing from 1 is
 
 ---
@@ -24,7 +41,7 @@ No surprises for Day 2. I did start this one on time and solved Part 1 in 10:00 
 
 Julia notes and observations:
 
-* It's surprising how similar Julia is to Python (and so far, just as powerful): string splitting (done with `split`, which is a native function and not a method of the String class as in Python) and array/tuple manipulations (defining empty arrays, appending to them, unpacking tuples, e.g. `amount, color = draw`) all are very similar. Porting the Python solution was straightforward and quick.
+* It's surprising how similar Julia is to Python (and so far, it's just as powerful): string splitting (done with `split`, which is a native function and not a method of the String class as in Python) and array/tuple manipulations (defining arrays, appending to them, slicing them, unpacking tuples, e.g. `amount, color = draw`) all are very similar. Porting the Python solution was straightforward and quick.
 
 ---
 

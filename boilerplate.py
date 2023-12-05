@@ -4,7 +4,7 @@ import sys
 
 # ==============================================================================
 
-# If no specific input given, default to "day<X>.in"
+# Get filename of input as CLI arg. If not given, default to "day<X>.in"
 if len(sys.argv) == 1:
   input_fname = sys.argv[0].replace(".py", ".in")
 else:
