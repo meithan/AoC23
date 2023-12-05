@@ -15,9 +15,9 @@ Part 1 was easy: it was just a matter of correctly parsing the input and writing
 
 From the moment I saw the input I feared that Part 2 was going to ask to search in a huge space -- and that's exactly what happened. After writing a "reverse map function" (to map locations back to the coresponding seed) it was a matter of trying locations and seeing if they mapped to a *valid* seed (checking if a seed is valid is easy: we just check if it's in one of the 10 ranges specified).
 
-So then began the search. Checking the "humidity-to-location map" informed that the kind of values the locations could end up being was possibly in the hundreds of millions -- large, but not intractable. So I began brute-forcing sequential location values starting from zero. Trying the first million values took about 10 seconds. So I decided to split the search space from 0 to 200 million into 8 parallel instances of the program, each starting from a value in 25 million increments. Many of the searches starting at higher values actually finished instantly, since their starting values yielded valid seeds. But I had to wait for all of them to finish to find the minimum. 
+So then began the search. Checking the "humidity-to-location map" informed that the kind of values the locations could end up being was possibly in the hundreds of millions -- large, but not intractable. So I began brute-forcing sequential location values starting from zero, stopping the moment a location was found that mapped into a valid seed. Trying the first million locations took about 10 seconds. So I decided to split the search space from 0 to 200 million into 8 parallel instances of the program, each starting from a different value in 25 million increments. Many of the searches starting at higher values actually finished instantly, since their starting values yielded valid seeds. But I had to wait for all of them to finish to find the lowest.
 
-And lo and behold, after about 5 minutes all searches finished, and the minimum location that resulted from a valid seed was about 104 millions. Whew!
+And lo and behold, after about 5 minutes all searches finished, and the lowest location that resulted from a valid seed was around 104 millions. Whew!
 
 Julia notes:
 * `mod(x, y)` does x modulo y, and `div(a, b)` does integer division

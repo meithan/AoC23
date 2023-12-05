@@ -130,8 +130,8 @@ solution = nothing
 sol_found = false
 count = 0
 for loc in start:stop
-
-  global seed = location_to_seed(loc)
+  
+  seed = location_to_seed(loc)
   
   for i in 1:2:length(seeds)
     s1 = seeds[i]
