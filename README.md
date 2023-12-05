@@ -3,7 +3,26 @@ My solutions for Advent of Code 2023. In Python 3, and I'm also porting them to 
 
 As last year, I'm generally not starting the problems as soon as they open, so I won't usually be reporting solve times.
 
-Go to day: [1](#day1) [2](#day2) [3](#day3) [4](#day4)
+Go to day: [1](#day1) [2](#day2) [3](#day3) [4](#day4) [4](#day4)
+
+---
+
+**Day 5**: [If You Give A Seed A Fertilizer](https://adventofcode.com/2023/day/5)<a name="day5"></a> - [my solution](https://github.com/meithan/AoC23/blob/main/day05)
+
+Since Julia is turning out to be as powerful and expressive as Python, I decided to try this solution in Julia from the get-go. In fact, I think I'll be sticking to Julia only, unless things get too hairy.
+
+Part 1 was easy: it was just a matter of correctly parsing the input and writing the function to map a seed to its final location by following the rules.
+
+From the moment I saw the input I feared that Part 2 was going to ask to search in a huge space -- and that's exactly what happened. After writing a "reverse map function" (to map locations back to the coresponding seed) it was a matter of trying locations and seeing if they mapped to a *valid* seed (checking if a seed is valid is easy: we just check if it's in one of the 10 ranges specified).
+
+So then began the search. Checking the "humidity-to-location map" informed that the kind of values the locations could end up being was possibly in the hundreds of millions -- large, but not intractable. So I began brute-forcing sequential location values starting from zero. Trying the first million values took about 10 seconds. So I decided to split the search space from 0 to 200 million into 8 parallel instances of the program, each starting from a value in 25 million increments. Many of the searches starting at higher values actually finished instantly, since their starting values yielded valid seeds. But I had to wait for all of them to finish to find the minimum. 
+
+And lo and behold, after about 5 minutes all searches finished, and the minimum location that resulted from a valid seed was about 104 millions. Whew!
+
+Julia notes:
+* `mod(x, y)` does x modulo y, and `div(a, b)` does integer division
+* `reverse` reverses an array
+* I used array comprehensions this time!
 
 ---
 
