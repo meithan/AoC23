@@ -3,7 +3,21 @@ My solutions for Advent of Code 2023. In Python 3, and I'm also porting them to 
 
 As last year, I'm generally not starting the problems as soon as they open, so I won't usually be reporting solve times.
 
-Go to day: [1](#day1) [2](#day2) [3](#day3) [4](#day4) [5](#day5) [6](#day6)
+Go to day: [1](#day1) [2](#day2) [3](#day3) [4](#day4) [5](#day5) [6](#day6) [7](#day7)
+
+---
+
+**Day 7**: [Camel Cards](https://adventofcode.com/2023/day/7)<a name="day7"></a> - [my solution](https://github.com/meithan/AoC23/blob/main/day07)
+
+Not difficult but a bit tedious, as coming up with the rules to correctly evaluate a hand is a bit complicated when jokers are involved.
+
+The evaluation is based on counting the number of repetitions of each card in the hand, and then checking whether enough repetitions occur for each hand type. For instance, a five of a kind requires that a card (any card) repeats 5 times, while a full house requires that a card repeats 3 times while another one repeats 2 times.
+
+With jokers (wildcards) the approach is the same, but it took me a while to get the correct set of rules.
+
+Julia notes
+* Passing a custom comparison function for the `sort()` function is very useful, glad Julia has it too; the comparison function, `lt(x,y)`, must return whether `x` is *strictly less* than `y` (so `false` in the case of equality).
+* `values(dict)` returns an array with the values of a dict (`keys(dict)` retuns the keys).
 
 ---
 
@@ -19,8 +33,7 @@ Since we're looking for integer solutions we take the ceiling of the smaller of 
 
 Julia notes:
 * It's nice that `ceil`, `floor` and `sqrt` are just native functions
-* I used `reduce()` to compute the product of an array of numbers (using `init=1`); reminds me of the old Pythont times where `map`, `filter` and `reduce` were common
-* 
+* I used `reduce()` to compute the product of an array of numbers (using `init=1`); reminds me of the old Python days where `map`, `filter` and `reduce` were common
 
 ---
 
