@@ -11,7 +11,7 @@ Go to day: [1](#day1) [2](#day2) [3](#day3) [4](#day4) [5](#day5) [6](#day6) [7]
 
 Not difficult but a bit tedious, as coming up with the rules to correctly evaluate a hand is a bit complicated when jokers are involved.
 
-The evaluation is based on counting the number of repetitions of each card in the hand, and then checking whether enough repetitions occur for each hand type. For instance, a five of a kind requires that a card (any card) repeats 5 times, while a full house requires that a card repeats 3 times while another one repeats 2 times.
+The evaluation is based on counting the number of repetitions of each card in the hand, and then checking whether enough repetitions occur for each hand type. The `counts` array holds the result: it's a list of numbers that has the repetition counts (of 2 or more of the same card) for each different type of card in the hand. So 'AAAAA' would yield only `[5]`, while 'AAQQ3' would yield `[2,2]` (note the 2 is repeated, because two different cards are each repeated two times).
 
 With jokers (wildcards) the approach is the same, but it took me a while to get the correct set of rules.
 
