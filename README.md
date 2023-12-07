@@ -3,7 +3,24 @@ My solutions for Advent of Code 2023. In Python 3, and I'm also porting them to 
 
 As last year, I'm generally not starting the problems as soon as they open, so I won't usually be reporting solve times.
 
-Go to day: [1](#day1) [2](#day2) [3](#day3) [4](#day4) [4](#day4)
+Go to day: [1](#day1) [2](#day2) [3](#day3) [4](#day4) [5](#day5) [6](#day6)
+
+---
+
+**Day 6**: [Wait For It](https://adventofcode.com/2023/day/6)<a name="day6"></a> - [my solution](https://github.com/meithan/AoC23/blob/main/day06)
+
+For Part 1 I simply checked all wait times and computed the distance traveled, as described.
+
+For Part 2, since doing that would be too slow, I just used math: the distance `D` traveled by waiting for a time `W` in a race of total time `T` is given by `D = (T-W)*W`, which is a quadratic equation in `W`. Its solution is:
+
+`W = (T +/- sqrt(T^2-4D))/2`
+
+Since we're looking for integer solutions we take the ceiling of the smaller of the two roots and the floor of the larger one. That then gives us the minimum and maximum wait times that result in us beating the record, and hence the answer (the number of integers between those two, inclusive).
+
+Julia notes:
+* It's nice that `ceil`, `floor` and `sqrt` are just native functions
+* I used `reduce()` to compute the product of an array of numbers (using `init=1`); reminds me of the old Pythont times where `map`, `filter` and `reduce` were common
+* 
 
 ---
 
