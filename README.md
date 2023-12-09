@@ -1,5 +1,7 @@
 # AoC23
-My solutions for Advent of Code 2023. In Python 3, and I'm also porting them to Julia as this year I want to learn it. I'll be leaving myself learning notes and comments on the Julia language as I go.
+My solutions for [Advent of Code 2023](https://adventofcode.com/2023).
+
+This year I began dual-solving them in Python and in Julia, as I want to learn/practice Julia, but starting from Day 5 I only solve them in Julia, as I think I'm almost as fluent with it than I am with Python. I left myself Julia learning notes and comments in each problem.
 
 As last year, I'm generally not starting the problems as soon as they open, so I won't usually be reporting solve times.
 
