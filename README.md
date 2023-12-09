@@ -7,6 +7,15 @@ Go to day: [1](#day1) [2](#day2) [3](#day3) [4](#day4) [5](#day5) [6](#day6) [7]
 
 ---
 
+**Day 9**: [Mirage Maintenance](https://adventofcode.com/2023/day/9)<a name="day9"></a> - [my solution](https://github.com/meithan/AoC23/blob/main/day09)
+
+Day 9 broke the theory that odd days are harder in AoC23: this was perhaps the easiest so far. In fact, I was surprised that Part 2 was really the same thing as Part 1: it didn't require us to search in a bigger space or answer a fundamentally different thing. At one point I was worried that Part 2 would ask to give what the next value in the sequence would be a billion steps further or something like that, which would've required figuring out the pattern. But nope.
+
+Julia:
+* `all(x->x==0, cur_seq)` is very useful, specially in this form that takes a predicate as first argument. The single-argument variant just checks whether all values are `true`.
+
+---
+
 **Day 8**: [Haunted Wasteland](https://adventofcode.com/2023/day/8)<a name="day8"></a> - [my solution](https://github.com/meithan/AoC23/blob/main/day08)
 
 Part 1 was simple. Part 2 was the first problem where brute force will not work at all, as the answer would require walking on the order of 10^13 steps.
