@@ -3,7 +3,19 @@ My solutions for Advent of Code 2023. In Python 3, and I'm also porting them to 
 
 As last year, I'm generally not starting the problems as soon as they open, so I won't usually be reporting solve times.
 
-Go to day: [1](#day1) [2](#day2) [3](#day3) [4](#day4) [5](#day5) [6](#day6) [7](#day7)
+Go to day: [1](#day1) [2](#day2) [3](#day3) [4](#day4) [5](#day5) [6](#day6) [7](#day7) [8](#day8)
+
+---
+
+**Day 8**: [Haunted Wasteland](https://adventofcode.com/2023/day/8)<a name="day8"></a> - [my solution](https://github.com/meithan/AoC23/blob/main/day08)
+
+Part 1 was simple. Part 2 was the first problem where brute force will not work at all, as the answer would require walking on the order of 10^13 steps.
+
+However, the example in the problem's description provided a hint that the walks are cyclic, just with different periods. If that's the case, then the first time all of them will synchronize is given by the [least common multiple](https://en.wikipedia.org/wiki/Least_common_multiple) of the periods. Before even checking if the walks in the input are actually periodic, I tried the lcm and it just worked! I was also surprised that Julia not only has a built-in lcm function, but it can actually take more than two arguments. Nice.
+
+Julia notes:
+* Julia has a built-in `lcm` function! It can even take more than two arguments.
+* To unpack an iterable into separate arguments in a function call, equivalent to using `*` in python, we use `...`, for instance: `lcm(array...)`.
 
 ---
 
@@ -15,7 +27,7 @@ The evaluation is based on counting the number of repetitions of each card in th
 
 With jokers (wildcards) the approach is the same, but it took me a while to get the correct set of rules.
 
-Julia notes
+Julia notes:
 * Passing a custom comparison function for the `sort()` function is very useful, glad Julia has it too; the comparison function, `lt(x,y)`, must return whether `x` is *strictly less* than `y` (so `false` in the case of equality).
 * `values(dict)` returns an array with the values of a dict (`keys(dict)` retuns the keys).
 
