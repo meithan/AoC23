@@ -5,7 +5,40 @@ This year I began dual-solving them in Python and in Julia, as I want to learn/p
 
 As last year, I'm generally not starting the problems as soon as they open, so I won't usually be reporting solve times.
 
-Go to day: [1](#day1) [2](#day2) [3](#day3) [4](#day4) [5](#day5) [6](#day6) [7](#day7) [8](#day8) [9](#day9)
+Go to day: [1](#day1) [2](#day2) [3](#day3) [4](#day4) [5](#day5) [6](#day6) [7](#day7) [8](#day8) [9](#day9) [10](#day10)
+
+---
+
+**Day 10**: [Pipe Maze](https://adventofcode.com/2023/day/10)<a name="day10"></a> - [my solution](https://github.com/meithan/AoC23/blob/main/day10)
+
+Whew, Part 2 of this one took a while.
+
+For Part 1 I simply wrote code to follow the pipes through the maze. This doesn't require a full graph walking/search algorithm (determining which neighbors are reachable), as any tile on the loop only connects to two other tiles: the one we came from, and the next we'll visit. So it's just a matter of switching directions carefully and waiting till we come back to the start. After that, the maximum distance (along the loop) is just half the total distance of the loop.
+
+Part 2, however, was significantly more difficult. What looked like a straightforward flood fill problem was rendered more complicated by the rule that one can "squeeze" between the pipes. I immediately thought of [polygon inclusion testing](https://en.wikipedia.org/wiki/Point_in_polygon): a point lies inside a given polygon if the half-line emanating from it towards infinity (or, in practice, enough distance to exit the bounding box of the polygon) crosses the boundary of the polygon an *odd* number of times, or lies outside the polygon if the number of crossings is even.
+
+Given that the segments of this polygon were either horizontal or vertical, I first tried walking along horizontal or vertical directions, seeing how many squares with part of the loop were encountered. But traveling along the boundary of the polygon is a problem, and I couldn't make it work.
+
+The next morning I revisited the problem bringing out the big cannons: instead of walking through the discrete space of tiles in an axis-align direction, I solved the more general problem of finding ray-segment intersections: from some point inside each candidate tile, I followed a ray towards the outside following a non-horizontal or vertical direction (so as to avoid moving along the boundary) and checked for intersection against every single segment of the loop.
+
+The ray-segment intersection algorithm is as follows: the ray starting at point `p` moving towards direction `d` can be written parametrically as `p + t*d`, where `t >= 0`, while the line segment between points a and b is defined as `a + u*(b-a)` with `0 <= u <= 1`. By setting `p + t*d = a + u*(b-a)` we have two linear equations that can be solved for parameters `t` and `u`. Defining the auxiliary vectors `v1 = p - a`, `v2 = b - a` and `v3 = [-dy, dx]` (a vector normal to the ray), the solution is:
+
+~~~
+t = (v2 ⨯ v1)_z / (v2 • v3)
+u = (v1 • v3) / (v2 • v3)
+~~~
+
+Then, barring degenerate cases such as the ray and segment overlapping or being parallel, the ray and segment intersect iff the found parameters are valid, i.e. `t >= 0` and `0 <= u <= 1`.
+
+To make it work for the problem I had to make sure the ray wouldn't cross corners (where it would technically intersect two segments and thus give an incorrect count). This was achieved by picking appropriate starting point inside each tile and direction.
+
+Julia:
+* I used `using LinearAlgebra` to import the `dot` operator, which works directly on Julia native arrays. The cross product is also defined, but only works for 3D vectors. Instead of augmenting the vectors, I simply wrote a function to return the z-component of the cross product of 2D vectors (it's nice that this is what numpy does when doing the cross product of 2D vectors).
+* I also used Julia `Set`s for quick inclusion checking; they're as handy as the Python ones.
+
+As part of the solution process I made some semi-fancy visualizations of the maze in the terminal. Here's my input, with the loop highlighted, inside tiles in green and the starting tile in cyan (click to view the full-size image):
+
+![](https://github.com/meithan/AoC23/blob/main/day10/maze.png)
 
 ---
 
