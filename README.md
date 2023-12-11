@@ -5,7 +5,23 @@ This year I began dual-solving them in Python and in Julia, as I want to learn/p
 
 As last year, I'm generally not starting the problems as soon as they open, so I won't usually be reporting solve times.
 
-Go to day: [1](#day1) [2](#day2) [3](#day3) [4](#day4) [5](#day5) [6](#day6) [7](#day7) [8](#day8) [9](#day9) [10](#day10)
+Go to day: [1](#day1) [2](#day2) [3](#day3) [4](#day4) [5](#day5) [6](#day6) [7](#day7) [8](#day8) [9](#day9) [10](#day10) [11](#day11)
+
+---
+
+**Day 11**: [Cosmic Expansion](https://adventofcode.com/2023/day/11)<a name="day11"></a> - [my solution](https://github.com/meithan/AoC23/blob/main/day11)
+
+When solving Part 1 I actually created the expanded map, as I thought it would be needed for Part 2, which required some fumbling around with awkward not-quite-2D-arrays in Julia (as far as I could tell you can't really transpose a vector of vectors, since they're not actual 2D arrays). After creating the expanded map, it's then a matter of going through all pairs of galaxies (each only once) and computing the Manhattan distance betwen them.
+
+Then, when I got to Part 2 I realized that creating the expanded map is useless. All that was needed is how the expansion alters the coordinates of the galaxies. The rule is simple: for each empty row, the x-coordinate of all galaxies *below* that row get expanded (by adding 1 in Part 1 or 999,999 in Part 2); similarly, for each empty column, the y-coordinate of all galaxies *to the right* of it get expanded. Perhaps the only catch is that we need to keep the original (non-expanded) coordinates to check which galaxies should get updated, and keep the updated coordinates in a separate array.
+
+After doing this, the same Manhattan distance calculation between all pairs (which did not require more time in Part 2) solved the problem.
+
+Julia notes:
+* Beware of using `copy` vs `deepcopy()` when cloning nested arrays.
+* Once can use thousands separators, e.g. `1_000_000`, for large numeric literals
+* I should dig deeper into [multi-dimensional arrays](https://docs.julialang.org/en/v1/manual/arrays/) in Julia, as when done properly they offer many tools and performance gains (just as in Numpy)
+
 
 ---
 
