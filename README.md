@@ -33,8 +33,8 @@ Then, barring degenerate cases such as the ray and segment overlapping or being 
 To make it work for the problem I had to make sure the ray wouldn't cross corners (where it would technically intersect two segments and thus give an incorrect count). This was achieved by picking appropriate starting point inside each tile and direction.
 
 Julia:
-* I used `using LinearAlgebra` to import the `dot` operator, which works directly on Julia native arrays. The cross product is also defined, but only works for 3D vectors. Instead of augmenting the vectors, I simply wrote a function to return the z-component of the cross product of 2D vectors (it's nice that this is what numpy does when doing the cross product of 2D vectors).
-* I also used Julia `Set`s for quick inclusion checking; they're as handy as the Python ones.
+* I used Julia's `LinearAlgebra` module to import the `dot` product operator, which works directly on native Julia arrays. The cross product is also defined there (and a [host of other functions](https://docs.julialang.org/en/v1/stdlib/LinearAlgebra/)), but it only operates on 3D vectors. Instead of augmenting the 2D vectors, I instead wrote a function to directly compute the z-component of the cross product of 2D vectors (it's nice that this is [what numpy does](https://numpy.org/doc/stable/reference/generated/numpy.cross.html) when doing the cross product of 2D vectors).
+* I also used Julia's `Set` for quick inclusion checking; they're as handy as the Python ones.
 
 As part of the solution process I made some semi-fancy visualizations of the maze in the terminal. Here's my input, with the loop highlighted, inside tiles in green and the starting tile in cyan (click to view the full-size image):
 
